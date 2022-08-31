@@ -1,6 +1,6 @@
 #  using string
-MyNumber = str(input("введить трьохзначне число:"))
-a, b, c = int(MyNumber[0]), int(MyNumber[1]), int(MyNumber[2])
+my_number = str(input("введить трьохзначне число:"))
+a, b, c = int(my_number[0]), int(my_number[1]), int(my_number[2])
 print(a+b+c)
 
 # using arithmetic operations
