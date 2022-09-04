@@ -13,5 +13,4 @@ def string_things(my_string):
     print(len(my_string))  # length
 
 
-
 string_things(my_string)
