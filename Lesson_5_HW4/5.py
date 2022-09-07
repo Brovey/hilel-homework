@@ -1,3 +1,6 @@
+number = float(input("Введить число:"))
+
+
 def sign_x(number):
     if number > 0:
         return 1
@@ -7,4 +10,8 @@ def sign_x(number):
         return -1
 
 
-print(sign_x(0))
+def main():
+    print(sign_x(number))
+
+
+main()

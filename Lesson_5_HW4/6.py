@@ -7,4 +7,4 @@ def fibonachi(number):
         return fibonachi(number - 1) + fibonachi(number - 2)
 
 
-print(fibonachi(2))
+print(fibonachi(20))

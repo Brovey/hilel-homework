@@ -1,4 +1,6 @@
+import cmath
 from math import sqrt
+from cmath import sqrt as complex_sqrt  # used for negative sqrt
 
 a = float(input("Введить коефіцієнти a: "))
 b = float(input("Введить коефіцієнти a: "))
@@ -17,15 +19,14 @@ def solve_quadratic_equation(a, b, c):
         x2 = None
         return x1, x2
     else:
-        x1 = None
-        x2 = None
+        i_discriminant = complex_sqrt(discriminant)
+        x1 = (b + i_discriminant)/2
+        x2 = (b - i_discriminant)/2
         return x1, x2
 
 
 def main():
-    if solve_quadratic_equation(a, b, c)[0] is None and solve_quadratic_equation(a, b, c)[1] is None:
-        print ("Немає рішень")
-    elif solve_quadratic_equation(a, b, c)[0] is not None and solve_quadratic_equation(a, b, c)[1] is None:
+    if solve_quadratic_equation(a, b, c)[0] is not None and solve_quadratic_equation(a, b, c)[1] is None:
         print("x =", solve_quadratic_equation(a, b, c)[0])
     else:
         print("x1 =", solve_quadratic_equation(a, b, c)[0])
@@ -33,5 +34,3 @@ def main():
 
 
 main()
-
-
