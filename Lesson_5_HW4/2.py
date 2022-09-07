@@ -9,24 +9,29 @@ def solve_quadratic_equation(a, b, c):
         x2 = (-b + sqrt(discriminant)) / (2 * a)  # if D > 0
         return x1, x2
     elif discriminant == 0:
-        x1 = -b / (2 * a)  # if D = 0
+        x1 = -b / (2 * a)  # if D = 0b
         x2 = None
         return x1, x2
     else:
-        None
+        x1 = None
+        x2 = None
+        return x1, x2
 
 
-def main(a, b, c):
+def main():
+    a = int(input("Введить коефіцієнти a: "))
+    b = int(input("Введить коефіцієнти a: "))
+    c = int(input("Введить коефіцієнти c: "))
 
-    if solve_quadratic_equation(a, b, c) is None:
-        print("Немає рішень")
-    elif solve_quadratic_equation(a, b, c)[1] is None:
+    if solve_quadratic_equation(a, b, c)[0] is None and solve_quadratic_equation(a, b, c)[1] is None:
+        print ("Немає рішень")
+    elif solve_quadratic_equation(a, b, c)[0] is not None and solve_quadratic_equation(a, b, c)[1] is None:
         print("x =", solve_quadratic_equation(a, b, c)[0])
     else:
         print("x1 =", solve_quadratic_equation(a, b, c)[0])
         print("x2 =", solve_quadratic_equation(a, b, c)[1])
 
 
-main(1, 6, 2)
+main()
 
 
