@@ -19,9 +19,9 @@ def solve_quadratic_equation(a, b, c):
 
 
 def main():
-    a = int(input("Введить коефіцієнти a: "))
-    b = int(input("Введить коефіцієнти a: "))
-    c = int(input("Введить коефіцієнти c: "))
+    a = float(input("Введить коефіцієнти a: "))
+    b = float(input("Введить коефіцієнти a: "))
+    c = float(input("Введить коефіцієнти c: "))
 
     if solve_quadratic_equation(a, b, c)[0] is None and solve_quadratic_equation(a, b, c)[1] is None:
         print ("Немає рішень")
