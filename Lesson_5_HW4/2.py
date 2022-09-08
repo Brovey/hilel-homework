@@ -17,19 +17,19 @@ def solve_quadratic_equation(a, b, c):
         x2 = None
         return x1, x2
     else:
-        x1 = None
-        x2 = None
-        return x1, x2
+        return None, None
 
 
 def main():
-    if solve_quadratic_equation(a, b, c)[0] is None and solve_quadratic_equation(a, b, c)[1] is None:
+    x1 = solve_quadratic_equation(a, b, c)[0]
+    x2 = solve_quadratic_equation(a, b, c)[1]
+    if x1 is None and x2 is None:
         print ("Немає рішень")
-    elif solve_quadratic_equation(a, b, c)[0] is not None and solve_quadratic_equation(a, b, c)[1] is None:
-        print("x =", solve_quadratic_equation(a, b, c)[0])
+    elif x1 is not None and x2 is None:
+        print("x =", x1)
     else:
-        print("x1 =", solve_quadratic_equation(a, b, c)[0])
-        print("x2 =", solve_quadratic_equation(a, b, c)[1])
+        print("x1 =", x1)
+        print("x2 =", x2)
 
 
 main()
