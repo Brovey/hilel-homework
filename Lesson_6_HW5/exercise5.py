@@ -1,4 +1,5 @@
 def create_chess():
+    """Funciton creates chessboard and according list with powers of 2 """
     letters = "abcdefgh"
     digits = "12345678"
     quantity_board = [1, 2]
@@ -15,6 +16,7 @@ def create_chess():
 
 
 def calculate_wheat_chess_position(kilograms):
+    """Compares quantity of seeds with quantity_board and return corresponding index from chess_board   """
     quantity = kilograms / 0.000035
     chess_board = create_chess()[0]
     quantity_board = create_chess()[1]
