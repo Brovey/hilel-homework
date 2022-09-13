@@ -20,7 +20,7 @@ def fizz_buzz(first_digit, last_digit):
 
 
 def main():
-    print("Числа FizzBuzz:", *fizz_buzz(1, 10), sep='\n')
+    print("Числа FizzBuzz:", *fizz_buzz(1, 100), sep='\n')
 
 
 main()
