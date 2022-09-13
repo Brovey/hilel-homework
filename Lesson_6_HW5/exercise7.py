@@ -8,6 +8,9 @@ def main():
     question = int(input("Вгадайте число від 1 до 10:"))
     if question == correct_answer:
         print("Ви вгадали це", correct_answer)
+    elif question < 1 or question > 10:
+        print("Ви маєте ввести ціле число від 1 до 10")
+        main()
     else:
         if question > correct_answer:
             print("Ви не вгадали, загадане число меньше")
@@ -17,4 +20,11 @@ def main():
             main()
 
 
-main()
+if __name__ == main():
+
+    main()
+
+
+
+
+

@@ -25,5 +25,3 @@ def get_max_digit_list(number):
 
 print(get_max_digit(number))
 print(get_max_digit_list(number))
-
-

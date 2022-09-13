@@ -12,4 +12,3 @@ def sum_symbol_codes(first, last):  # returns int
 
 
 print(sum_symbol_codes("0", "6"))
-

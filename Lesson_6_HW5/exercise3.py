@@ -15,4 +15,4 @@ def diff_odd_even(num_limit, lower_bound, upper_bound):  # returns int
     return sum_even - sum_odd
 
 
-print(diff_odd_even(10,1,5))
+print(diff_odd_even(10, 1, 5))
