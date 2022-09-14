@@ -30,11 +30,11 @@ def guess_comp():
                        f" БІЛЬШЕ якщо загадане число більше або МЕНЬШЕ якщо твое число  меньше")
         while answer_number != "ТАК":
             if answer == "БІЛЬШЕ":
-                answer_number = randint(answer_number, 10)
+                answer_number = randint((answer_number+1), 10)
                 answer = input(f"Ти загадав число {answer_number} , якщо вірно то введи ТАК якщо число не вірне "
                                f"то введи БІЛЬШЕ якщо загадане число більше або МЕНЬШЕ якщо твое число  меньше")
             elif answer == "МЕНЬШЕ":
-                answer_number = randint(1, answer_number)
+                answer_number = randint(1, (answer_number-1))
                 answer = input(f"Ти загадав число {answer_number} , якщо вірно то введи ТАК якщо число не вірне "
                                f"то введи БІЛЬШЕ якщо загадане число більше або МЕНЬШЕ якщо твое число  меньше")
             else:
@@ -67,8 +67,7 @@ def main():
         main()
 
 
-if __name__ == main():
+if __name__ == "__main__":
 
     main()
-
 
