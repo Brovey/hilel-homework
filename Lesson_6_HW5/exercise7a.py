@@ -22,8 +22,27 @@ def guess_player():
 
 
 def guess_comp():
-    print("Ще не готово")
-    return main()
+    """Super bad search here still thinking """
+    answer_number = randint(1, 10)
+    welcome_text = input("Загадай число от 1 до 10\nВведи ТАК якщо загадав")
+    if welcome_text == "ТАК":
+        answer = input(f"Ти загадав число {answer_number} , якщо вірно то введи ТАК якщо число не вірне то введи"
+                       f" БІЛЬШЕ якщо загадане число більше або МЕНЬШЕ якщо твое число  меньше")
+        while answer_number != "ТАК":
+            if answer == "БІЛЬШЕ":
+                answer_number = randint(answer_number, 10)
+                answer = input(f"Ти загадав число {answer_number} , якщо вірно то введи ТАК якщо число не вірне "
+                               f"то введи БІЛЬШЕ якщо загадане число більше або МЕНЬШЕ якщо твое число  меньше")
+            elif answer == "МЕНЬШЕ":
+                answer_number = randint(1, answer_number)
+                answer = input(f"Ти загадав число {answer_number} , якщо вірно то введи ТАК якщо число не вірне "
+                               f"то введи БІЛЬШЕ якщо загадане число більше або МЕНЬШЕ якщо твое число  меньше")
+            else:
+                print("Я вгадала")
+                break
+
+    game_choice()
+
 
 def game_choice():
     welcome_txt = f"Бажаєете грати ще раз?\nВведить ТАК для подальшої гри чи НІ для завершення\nТАК/НІ:"
@@ -33,9 +52,10 @@ def game_choice():
     elif choice == "НІ":
         pass
 
+
 def main():
-    welcome_txt = f"     Оберить тип гри\nВгадує гравец    (натиснить 1) \nВгадує комп'ютер (натиснить 2)" \
-                  f"\nДля виходу       (натиснить 3)\n1/2/3?:"
+    welcome_txt = f"     Оберить тип гри\nВгадує гравец    (введить 1) \nВгадує комп'ютер (введить 2)" \
+                  f"\nДля виходу       (введить 3)\n1/2/3?:"
     main_choice = int(input(welcome_txt))
     if main_choice == 1:
         guess_player()
