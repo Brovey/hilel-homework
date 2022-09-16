@@ -5,17 +5,20 @@ number = randint(1000000000000, 9999999999999)
 
 def get_max_digit(number):  # returns int
     """Using string and method sorted """
+    print(number)
     number_str = str(number)
-    sorted_numbers = "".join(sorted(number_str, reverse=True))
+    sorted_numbers = sorted(number_str, reverse=True)
     return int(sorted_numbers[0])
 
 
 def get_max_digit_list(number):
     """Using list and iterations"""
     number_list = []
+    while number != 0:
+        number_list.insert(0, number % 10)  # used insert here to make  elements order  according to number
+        number = number//10
+    print(number_list)
     max_digit = None
-    for i in (str(number)):
-        number_list.append(int(i))
     for e in number_list:
         if max_digit is None or e > max_digit:
             max_digit = e
