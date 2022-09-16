@@ -7,8 +7,14 @@ def sum_symbol_codes(first, last):  # returns int
         codes.append(first_symbol_ord+1)
         first_symbol_ord += 1
         check_ord += 1
-
     return sum(codes)
 
 
 print(sum_symbol_codes("0", "6"))
+
+
+def sum_symbol_codes_simple(first, last):
+    return sum(range(ord(first), ord(last) + 1))
+
+
+print(sum_symbol_codes_simple("0", "6"))
