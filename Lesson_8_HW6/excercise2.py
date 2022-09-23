@@ -1,4 +1,4 @@
-def copydeep(lst):
+def copy_deep(lst):
     list_new= []
     for i in list1:
         if isinstance(i, list):
@@ -9,9 +9,6 @@ def copydeep(lst):
 
 
 list1 = [1, 2, 3, ["a", "b"]]
-list_new = copydeep(list1)
+list_new = copy_deep(list1)
 
-print(list1 is list_new)
-print(list1, list_new)
-list1[3].append("c")
-print(list1, list_new)
+

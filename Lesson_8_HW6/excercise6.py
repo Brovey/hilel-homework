@@ -20,7 +20,6 @@ def permutate(text):  # returns permuted text
             permuted_text.append(i)
     for i in permuted_text:
         word = "".join(i)
-        print(word)
         final.append(word)
     return " ".join(final)
 
