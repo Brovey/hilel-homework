@@ -1,22 +1,32 @@
-def copy_deep(my_tuple=None, my_set=None):
-    tmp_list = []
-    tmp_set = {}
-    if my_tuple is not None:
-        for i in my_tuple:
-            tmp_list.append(i)
-
-    if my_set is not None:
-        for i in my_set:
-            if isinstance(i, list):
-                tmp_set[i] = my_set[copy_deep(i)]
+def copy_deep(any_set):
+    """Receive any of tuple, dict or list and return copy"""
+    list_new = []
+    dict_new = {}
+    if isinstance(any_set, tuple):
+        new_tuple = any_set
+        return new_tuple
+    if isinstance(any_set, list):
+        for elem in any_set:
+            if isinstance(elem, list):
+                list_new.append(copy_deep(elem))
             else:
-                for i in my_set:
-                    tmp_set[i] = my_set[i]
-    return tuple(tmp_list), tmp_set
+                list_new.append(elem)
+        return list_new
+    if isinstance(any_set, dict):
+        for value in any_set:
+            for values in any_set.values():
+                if not isinstance(values, list):
+                    dict_new[value] = any_set[value]
+
+                else:
+                    dict_new[value] = copy_deep(any_set[value])
+
+        return dict_new
 
 
-tupple1 = (1, 2, 3, [55, 55, 66, ["gg"]])
-set1 = {'5': 5, '6': [1, 2, 3, 4, 5]}
-copies = copy_deep(tupple1,set1)
-set1 = {'5': 5, '6': [1, 2, 3, 4, 5]}
-print(f'Оригинал кортежа{tupple1}\nКопия кортежа{copies[0]}\nОригинал словаря {set1}\nКопия словаря {copies[1]}')
+tuple1 = (1, 2, 3, [55, 55, 66, ["gg"]])
+dict1 = {'5': 5, '6': [1, 2, 3, 4, 5, ["test nested list"]]}
+list1 = [1, 2, 3, ["a", "b", [1]]]
+copies = copy_deep(dict1)
+copies['6'] = [1, 2, 3, 4, 5, ["test nested list"],777777]
+print(copies, dict1)
