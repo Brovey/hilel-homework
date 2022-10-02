@@ -13,20 +13,22 @@ def copy_deep(any_set):
                 list_new.append(elem)
         return list_new
     if isinstance(any_set, dict):
-        for value in any_set:
-            for values in any_set.values():
-                if not isinstance(values, list):
-                    dict_new[value] = any_set[value]
+        """"
+        for cicle   showed by Artem as option  not working, i dont know why did same before and it was not ok:
+        for key, value in any_set.items():
+            dict_new[key] = value
+        """
+        return {copy_deep(key): copy_deep(value) for key, value in any_set.items()}
+    return any_set  # for dict
 
-                else:
-                    dict_new[value] = copy_deep(any_set[value])
 
-        return dict_new
+
 
 
 tuple1 = (1, 2, 3, [55, 55, 66, ["gg"]])
 dict1 = {'5': 5, '6': [1, 2, 3, 4, 5, ["test nested list"]]}
 list1 = [1, 2, 3, ["a", "b", [1]]]
-copies = copy_deep(dict1)
-copies['6'] = [1, 2, 3, 4, 5, ["test nested list"],777777]
-print(copies, dict1)
+copies = copy_deep(list1)
+#  copies[3][2].append([777777])
+
+print(copies, list1)
