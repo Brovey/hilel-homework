@@ -7,6 +7,7 @@ running = True
 phone_book = [
               {"name": "Petr", "surname": "Petrov", "age": 50, "phone_number":"+380501234567"},
               {"name": "Ivan", "surname": "Ivanov", "age": 15, "phone_number":"+380507654321"},
+              {"name": "Oleg", "surname": "Sidorov", "age": 50, "phone_number":"+380507554555"}
              ]
 
 
@@ -74,7 +75,17 @@ def find_entry_name_phonebook():
 
 #------------------------------------------------------------------------------
 def find_entry_age_phonebook():
-    pass
+    age = int(input("    Enter age: "))
+    index = 1
+    found = False
+    for entry in phone_book:
+        if entry["age"] == age:
+            print_entry(index, entry)
+            index += 1
+            found = True
+    if not found:
+        printError("Not found!!")
+
 
 
 #------------------------------------------------------------------------------
@@ -99,7 +110,13 @@ def increase_age():
 
 #------------------------------------------------------------------------------
 def avr_age_of_all_persons():
-    pass
+    average = 0
+    for items in phone_book:
+        for key, value in items.items():
+            if key == "age":
+                average += value
+
+    print(f"Середній вік {round(average/len(phone_book))} років")
 
 
 #------------------------------------------------------------------------------

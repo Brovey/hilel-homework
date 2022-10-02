@@ -25,16 +25,23 @@ def guess_comp():
     """Super bad search here still thinking """
     answer_number = randint(1, 10)
     welcome_text = input("Загадай число от 1 до 10\nВведи ТАК якщо загадав")
+    wrong_answers = []
     if welcome_text == "ТАК":
         answer = input(f"Ти загадав число {answer_number} , якщо вірно то введи ТАК якщо число не вірне то введи"
                        f" БІЛЬШЕ якщо загадане число більше або МЕНЬШЕ якщо твое число  меньше")
         while answer_number != "ТАК":
             if answer == "БІЛЬШЕ":
-                answer_number = randint((answer_number+1), 10)
+                wrong_answers.append(answer_number)
+                answer_number = randint(answer_number, 10)
+                if answer_number in wrong_answers:
+                    answer_number = randint(answer_number, 10)
                 answer = input(f"Ти загадав число {answer_number} , якщо вірно то введи ТАК якщо число не вірне "
                                f"то введи БІЛЬШЕ якщо загадане число більше або МЕНЬШЕ якщо твое число  меньше")
             elif answer == "МЕНЬШЕ":
-                answer_number = randint(1, (answer_number-1))
+                wrong_answers.append(answer_number)
+                answer_number = randint(1, answer_number)
+                if answer_number in wrong_answers:
+                    answer_number = randint(1, answer_number)
                 answer = input(f"Ти загадав число {answer_number} , якщо вірно то введи ТАК якщо число не вірне "
                                f"то введи БІЛЬШЕ якщо загадане число більше або МЕНЬШЕ якщо твое число  меньше")
             else:
