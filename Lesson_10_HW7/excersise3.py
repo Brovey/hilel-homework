@@ -5,9 +5,10 @@ running = True
 
 #------------------------------------------------------------------------------
 phone_book = [
-              {"name": "Petr", "surname": "Petrov", "age": 50, "phone_number":"+380501234567"},
-              {"name": "Ivan", "surname": "Ivanov", "age": 15, "phone_number":"+380507654321"},
-              {"name": "Oleg", "surname": "Sidorov", "age": 50, "phone_number":"+380507554555"}
+              {"name": "Petr", "surname": "Petrov", "age": 50, "phone_number":"+380501234567", "country": "Ukraine"},
+              {"name": "Ivan", "surname": "Ivanov", "age": 15, "phone_number":"+380507654321", "country": "Ukraine"},
+              {"name": "Oleg", "surname": "Sidorov", "age": 50, "phone_number":"+380507554555", "country": "Usa"},
+              {"name": "Oleg", "surname": "Antonov", "age": 25, "phone_number":"+380507554556", "country": "Poland"}
              ]
 
 
@@ -18,6 +19,7 @@ def print_entry(number, entry):
     print ("| Name:    %20s |" % entry["name"])
     print ("| Age:     %20s |" % entry["age"])
     print ("| Phone:   %20s |" % entry["phone_number"])
+    print ("| Country: %20s |" % entry["country"])
     print ()
 
 
@@ -90,7 +92,16 @@ def find_entry_age_phonebook():
 
 #------------------------------------------------------------------------------
 def delete_entry_name_phonebook():
-    pass
+    del_name = str(input("    Enter name to delete entry: "))
+    found = False
+    for item in reversed(phone_book):
+        for value in item.values():
+            if value == del_name:
+                index = phone_book.index(item)
+                del phone_book[index]
+                found = True
+    if not found:
+        printError("Not found!!")
 
 
 #------------------------------------------------------------------------------
@@ -100,19 +111,52 @@ def count_all_entries_in_phonebook():
 
 #------------------------------------------------------------------------------
 def print_phonebook_by_age():
-    pass
+    print ()
+    print ()
+    print ("#########  Phone book  ##########")
+    print ()
+    new_phone_book = sorted(phone_book, key=lambda i: i['age'])
+    number = 1
+    for entry in new_phone_book:
+        print_entry(number, entry)
+        number += 1
+
+
 
 
 #------------------------------------------------------------------------------
 def increase_age():
-    pass
+    age_increase = int(input("    Enter years to increase age: "))
+    for item in phone_book:
+        for key, value in item.items():
+            if key == "age":
+                new_value = value + age_increase
+                item.update({key: new_value})
+
+
+    if len(phone_book) == 0:
+        printError("Not found!!")
+
+
+def find_by_country():
+    country = str(input("    Enter country: "))
+    index = 1
+    found = False
+    for entry in phone_book:
+        if entry["country"] == country:
+            print_entry(index, entry)
+            index += 1
+            found = True
+    if not found:
+        printError("Not found!!")
+
 
 
 #------------------------------------------------------------------------------
 def avr_age_of_all_persons():
     average = 0
-    for items in phone_book:
-        for key, value in items.items():
+    for elements in phone_book:
+        for key, value in elements.items():
             if key == "age":
                 average += value
 
@@ -154,6 +198,7 @@ def print_prompt():
       print("     7 - The number of entries in the phonebook")
       print("     8 - Avr. age of all persons")
       print("     9 - Increase age by num. of years")
+      print("     c - Find entry by country")
       print("-----------------------------")
       print("     s - Save to file")
       print("     l - Load from file")
@@ -177,6 +222,7 @@ def main():
                   '7':  count_all_entries_in_phonebook,
                   '8':  avr_age_of_all_persons,
                   '9':  increase_age,
+                  'c':  find_by_country,
 
                   '0':  exit,
                   's':  save_to_file,
