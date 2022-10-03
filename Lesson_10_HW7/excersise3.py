@@ -138,6 +138,7 @@ def increase_age():
         printError("Not found!!")
 
 
+#------------------------------------------------------------------------------
 def find_by_country():
     country = str(input("    Enter country: "))
     index = 1
@@ -151,6 +152,19 @@ def find_by_country():
         printError("Not found!!")
 
 
+#------------------------------------------------------------------------------
+def print_by_country():
+    print()
+    print()
+    print("#########  Phone book  ##########")
+    print()
+    new_phone_book = sorted(phone_book, key=lambda i: i['country'])
+    number = 1
+    for entry in new_phone_book:
+        print_entry(number, entry)
+        number += 1
+
+
 
 #------------------------------------------------------------------------------
 def avr_age_of_all_persons():
@@ -160,7 +174,7 @@ def avr_age_of_all_persons():
             if key == "age":
                 average += value
 
-    print(f"Середній вік {round(average/len(phone_book))} років")
+    print(f"Average age {round(average/len(phone_book))} years")
 
 
 #------------------------------------------------------------------------------
@@ -199,6 +213,7 @@ def print_prompt():
       print("     8 - Avr. age of all persons")
       print("     9 - Increase age by num. of years")
       print("     c - Find entry by country")
+      print("     v - Print phonebook entries by country")
       print("-----------------------------")
       print("     s - Save to file")
       print("     l - Load from file")
@@ -223,6 +238,7 @@ def main():
                   '8':  avr_age_of_all_persons,
                   '9':  increase_age,
                   'c':  find_by_country,
+                  'v':  print_by_country,
 
                   '0':  exit,
                   's':  save_to_file,
