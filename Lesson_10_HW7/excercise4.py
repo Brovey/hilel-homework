@@ -6,6 +6,7 @@ def group_by_surname(list_of_enrollees):  # returns 4 ints
         for key, value in groups.items():
             if surname[0] in value:
                 groups_result[key] += 1
+                break
 
     return tuple(groups_result.values())
 

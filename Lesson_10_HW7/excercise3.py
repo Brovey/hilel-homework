@@ -42,13 +42,16 @@ def add_entry_phonebook():
     name    = input("    Enter name: ")
     age     = int(input("    Enter age: "))
     phone_number   = input("    Enter phone num.: ")
+    country  =  input("    Enter country: ")
 
     entry = {}
     entry["surname"] = surname
     entry["name"] = name
     entry["age"] = age
     entry["phone_number"] = phone_number
+    entry["country"] = country
     phone_book.append(entry)
+
 
 
 #------------------------------------------------------------------------------
@@ -95,11 +98,10 @@ def delete_entry_name_phonebook():
     del_name = str(input("    Enter name to delete entry: "))
     found = False
     for item in reversed(phone_book):
-        for value in item.values():
-            if value == del_name:
-                index = phone_book.index(item)
-                del phone_book[index]
-                found = True
+        if item['name'] == del_name:
+            index = phone_book.index(item)
+            del phone_book[index]
+            found = True
     if not found:
         printError("Not found!!")
 
@@ -128,12 +130,7 @@ def print_phonebook_by_age():
 def increase_age():
     age_increase = int(input("    Enter years to increase age: "))
     for item in phone_book:
-        for key, value in item.items():
-            if key == "age":
-                new_value = value + age_increase
-                item.update({key: new_value})
-
-
+        item["age"] += age_increase
     if len(phone_book) == 0:
         printError("Not found!!")
 
@@ -170,9 +167,7 @@ def print_by_country():
 def avr_age_of_all_persons():
     average = 0
     for elements in phone_book:
-        for key, value in elements.items():
-            if key == "age":
-                average += value
+        average += elements["age"]
 
     print(f"Average age {round(average/len(phone_book))} years")
 

@@ -4,13 +4,13 @@ text = "Это пример текста для функции которая п
 
 def permutate(text):  # returns permuted text
     splitted_text = text.split()
-    splitted_by_letter_word = []
+    #splitted_by_letter_word = []
     permuted_text = []
     final = []
-    for i in splitted_text:
-        splitted_by_letter_word.append(list(i))
+    #for i in splitted_text:
+    #    splitted_by_letter_word.append(list(i))
 
-    for i in splitted_by_letter_word:
+    for i in splitted_text:
         if len(i) != 1:
             shuf_medium = random.sample(i[1:-1], len(i[1:-1]))
             shuf_medium.insert(0, i[0])
