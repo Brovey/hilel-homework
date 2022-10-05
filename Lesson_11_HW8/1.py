@@ -4,7 +4,6 @@ def decorator(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         args = [i for i in args]
-        kwargs = [f"{k}={v!r}" for k, v in kwargs.items()]
         print (type(args),args)
         print(type(kwargs), kwargs)
         for i in args:
@@ -27,7 +26,7 @@ def decorator(func):
 
 @decorator
 def input_value(a,b):
-    print(a,b, c , d)
+    print(a,b,)
 
 input_value(3333, 'dfsdfs', )
 
