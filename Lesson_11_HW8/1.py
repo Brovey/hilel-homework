@@ -1,37 +1,25 @@
 import functools
 
-def decorator(func):
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        args = [i for i in args]
-        print (type(args),args)
-        print(type(kwargs), kwargs)
-        for i in args:
 
-            if not isinstance(i, str):
-                print(i, "NOT")
-        else:
-            print(i, "YES")
-
-       # func(*args, **kwargs)
-            # записати результат функції у змінну
-            # зробити перевірку типу змінної з expected_types
-            # якщо результат фунції не є чимось переліченим у expected_type
-            # викликати свою помилку або просто raise Exception
-    return wrapper
+def expected(expected_types):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            args = [a for a in args]
+            kwargs = [v for v in kwargs.values()]
+            for i in args:
+                if not isinstance(i, expected_types):
+                    raise TypeError(f"Was expected {expected_types} but {type(i)} is given")
+            for i in kwargs:
+                if not isinstance(i, expected_types):
+                    raise TypeError(f"Was expected {expected_types} but {type(i)} is given")
+        return wrapper
+    return decorator
 
 
+@expected((int, list, str, float))
+def input_value(*args):
+    return args
 
 
-
-@decorator
-def input_value(a,b):
-    print(a,b,)
-
-input_value(3333, 'dfsdfs', )
-
-
-
-
-
-
+input_value(3333, "test", [], (),  a=4, b="stttttt")
