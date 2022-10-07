@@ -1,25 +1,36 @@
 import functools
 
 
+class CustomError(Exception):
+    pass
+
+
+class UnexpectedTypeException(CustomError):
+    pass
+
+
 def expected(expected_types):
     def decorator(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
-            args = [a for a in args]
-            kwargs = [v for v in kwargs.values()]
-            for i in args:
-                if not isinstance(i, expected_types):
-                    raise TypeError(f"Was expected {expected_types} but {type(i)} is given")
-            for i in kwargs:
-                if not isinstance(i, expected_types):
-                    raise TypeError(f"Was expected {expected_types} but {type(i)} is given")
+            function = func(*args, **kwargs)
+            try:
+                if not isinstance(function, expected_types):
+                    raise UnexpectedTypeException
+            except UnexpectedTypeException:
+                print(f"UnexpectedType! Was expected {expected_types} but {type(function)} is given")
+            return function
         return wrapper
     return decorator
 
 
-@expected((int, list, str, float))
-def input_value(*args):
-    return args
+@expected((int, str))
+def input_value():
+    a = 4.5
+    return a
 
 
-input_value(3333, "test", [], (),  a=4, b="stttttt")
+print(input_value())
+
+
+
