@@ -3,31 +3,27 @@ def copy_deep(any_set):
     if isinstance(any_set, tuple):
         list_new = []
         for elem in any_set:
-            if isinstance(elem, list):
-                list_new.append(copy_deep(elem))
-            else:
-                list_new.append(elem)
+            list_new.append(copy_deep(elem))
         return tuple(list_new)
     if isinstance(any_set, list):
         list_new = []
         for elem in any_set:
-            if isinstance(elem, list):
-                list_new.append(copy_deep(elem))
-            else:
-                list_new.append(elem)
+            list_new.append(copy_deep(elem))
         return list_new
     if isinstance(any_set, dict):
-        dict_new = {}  # problem was here  my dict_new = {}  was above all if statement
+        dict_new = {}
         for key, value in any_set.items():
-            dict_new[key] = value
+            dict_new[copy_deep(key)] = copy_deep(value)
         return dict_new
     return any_set
 
-tuple1 = (1, 2, 3, [55, 55, 66, ["gg"]])
-dict1 = {'5': 5, '6': [1, 2, 3, 4, 5, ["test nested list"]]}
-list1 = [1, 2, 3, ["a", "b", [1]]]
-copy = copy_deep(list1)
-#copy[3][2].append([777777])
-#dict1 = {'5': 5, '6': [1, 2, 3, 4, 5, ["test nested list",[77777]]]}
 
-print(copy, list1)
+tuple1 = (1, 2, [55,  ["test"]])
+dict1 = {'a': [(1, [2, 3], ([1, 2, 3], ))]}
+list1 = [1, 2, ["a", "b", [1]]]
+copy = copy_deep(tuple1)
+#print(f'copy     {copy}\noriginal {dict1}\n',  copy['a'] is dict1['a'])
+#print(f'copy     {copy}\noriginal {list1}\n',  copy is list1)
+#print(id(copy[2][2]), id(list1[2][2]))
+print(f'copy     {copy}\noriginal {tuple1}\n',  copy[1] is tuple1[1])
+print(id(copy[0]), id(tuple1[0]))
