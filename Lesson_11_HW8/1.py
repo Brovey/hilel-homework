@@ -14,11 +14,9 @@ def expected(expected_types):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             function = func(*args, **kwargs)
-            try:
-                if not isinstance(function, expected_types):
-                    raise UnexpectedTypeException
-            except UnexpectedTypeException:
-                print(f"UnexpectedType! Was expected {expected_types} but {type(function)} is given")
+            if not isinstance(function, expected_types):
+                raise UnexpectedTypeException(f"UnexpectedType! Was expected {expected_types} but"
+                                              f" {type(function)} is given")
             return function
         return wrapper
     return decorator
@@ -26,11 +24,8 @@ def expected(expected_types):
 
 @expected((int, str))
 def input_value():
-    a = 4.5
-    return a
+    value = []
+    return value
 
 
 print(input_value())
-
-
-
