@@ -18,12 +18,10 @@ def copy_deep(any_set):
     return any_set
 
 
-tuple1 = (1, 2, [55,  ["test"]])
+tuple1 = (1, 2, [55,  ["test"], {"a": 1}, (1, 2, 3)])
 dict1 = {'a': [(1, [2, 3], ([1, 2, 3], ))]}
-list1 = [1, 2, ["a", "b", [1]]]
-copy = copy_deep(tuple1)
-#print(f'copy     {copy}\noriginal {dict1}\n',  copy['a'] is dict1['a'])
-#print(f'copy     {copy}\noriginal {list1}\n',  copy is list1)
-#print(id(copy[2][2]), id(list1[2][2]))
-print(f'copy     {copy}\noriginal {tuple1}\n',  copy[1] is tuple1[1])
-print(id(copy[0]), id(tuple1[0]))
+list1 = [1, 2, ["a", "b", [1], {"a": 1}, (1, 2, 3)]]
+copy = copy_deep(dict1)
+print(f'copy     {copy}\noriginal {dict1}\n',  copy is dict1)
+
+
