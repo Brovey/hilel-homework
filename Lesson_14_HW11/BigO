@@ -1,0 +1,53 @@
+
+Завдання 1.
+O(1)
+
+Завдання 2.
+O(n)
+
+Завдання 3.
+a)
+O(n)
+
+б)
+O(1)
+
+Завдання 4.
+O(1)
+
+Завдання 5.
+O(n)
+
+Завдання 6.
+Напишіть в нотації Великого О, яка часова складність даного коду, якщо в списку value є N елементів:
+
+if isinstance(value, list):    # O(n)
+    for i in range(0, 100, 3): # O(1)
+        if i in value:         # O(n)
+            value.remove(i):   # O(n)
+Answer - O(n^3)
+
+
+Завдання 7.
+
+work_list = [*a]                           # O(n) тут я сомневаюсь O(n) или O(1) но склоняюсь к O(n)
+for i in range(len(work_list)):            # O(n)
+    for j in range(1, len(work_list)):     # O(n)
+        if work_list[j-1] > work_list[j]:  # O(1)
+            buffer = work_list[j-1]        # O(1)
+            work_list[j-1] = work_list[j]  # O(1)
+            work_list[j] = buffer          # O(1)
+
+
+Answer - O(n^3)
+
+Завдання 8.
+
+Напишіть в нотації Великого О, яка часова складність даного коду, якщо в списку some_list є N елементів:
+
+result = {}                  # O(1)
+for elem in some_list:       # O(n)
+    if elem not in result:   # O(n)
+        result[elem] = True  # O(1)
+
+Answer - O(n^2)
