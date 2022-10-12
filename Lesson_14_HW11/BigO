@@ -1,6 +1,7 @@
 
 Завдання 1.
 O(1)
+https://wiki.python.org/moin/TimeComplexity
 
 Завдання 2.
 O(n)
@@ -13,7 +14,9 @@ O(n)
 O(1)
 
 Завдання 4.
-O(1)
+O(1) or O(n) worst amortized case! что есть крайне редко
+https://wiki.python.org/moin/TimeComplexity
+
 
 Завдання 5.
 O(n)
@@ -25,7 +28,7 @@ if isinstance(value, list):    # O(n)
     for i in range(0, 100, 3): # O(1)
         if i in value:         # O(n)
             value.remove(i):   # O(n)
-Answer - O(n^3)
+Answer - O(n^2) но выглядит как O(n^3)
 
 
 Завдання 7.
@@ -39,7 +42,7 @@ for i in range(len(work_list)):            # O(n)
             work_list[j] = buffer          # O(1)
 
 
-Answer - O(n^3)
+Answer - O(n^2)
 
 Завдання 8.
 
@@ -51,3 +54,5 @@ for elem in some_list:       # O(n)
         result[elem] = True  # O(1)
 
 Answer - O(n^2)
+если иммется ввиду что if elem not in result ничего оне делает при пустом result как в задании то
+Answer - O(n)
