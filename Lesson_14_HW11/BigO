@@ -14,12 +14,12 @@ O(n)
 O(1)
 
 Завдання 4.
-O(1) or O(n) worst amortized case! что есть крайне редко
+O(1) or O(n) worst amortized case
 https://wiki.python.org/moin/TimeComplexity
 
 
 Завдання 5.
-O(n)
+O(1) обычно. O(n) - в случаях когда наборы  ключ - значение возвращают одинаковй хеш и тогда будет полный перебор O(n)
 
 Завдання 6.
 Напишіть в нотації Великого О, яка часова складність даного коду, якщо в списку value є N елементів:
@@ -28,7 +28,7 @@ if isinstance(value, list):    # O(n)
     for i in range(0, 100, 3): # O(1)
         if i in value:         # O(n)
             value.remove(i):   # O(n)
-Answer - O(n^2) но выглядит как O(n^3)
+Answer - O(n)
 
 
 Завдання 7.
@@ -53,6 +53,4 @@ for elem in some_list:       # O(n)
     if elem not in result:   # O(n)
         result[elem] = True  # O(1)
 
-Answer - O(n^2)
-если иммется ввиду что if elem not in result ничего оне делает при пустом result как в задании то
 Answer - O(n)
