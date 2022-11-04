@@ -27,8 +27,10 @@ class Storage:
         self.data_base = {}  # keeping items info
 
     def print_income(self):
-        print(f'Already sold {self.income_by_item} UAH')
-        print(f'Total income: {self.total_income} UAH')
+        print(f'Already sold:')
+        for key in self.income_by_item:
+            print(f'{self.storage[key][0]} for  {self.income_by_item[key]} UAH')
+        print(f'Total income {self.total_income}')
 
     def add_item_manually(self):
         item_id = str(input("Enter item id:"))
@@ -67,29 +69,24 @@ class Storage:
                 self.total_income += sell_quantity * self.data_base[key][1]
                 break
 
-    def print_items_limits(self):
-        print()
-
-
-
 
 class MainMenu:
     def __init__(self, running=True):
         self.running = running
 
     def print_menu(self):
-        print("--------------------------")
-        print("--------------------------")
+        print("--------------------------------------------")
+        print("--------------------------------------------")
         print("- 1. Add new product to database ")
         print("- 2. Add new product to storage ")
         print("- 3. Sell product")
-        print("- 4. Income by products and total ")
+        print("- 4. Income by products and total income ")
         print("- Save to file")
         print("- Load from file")
         print("- 5. Print product limits   ")
         print("- 0. Exit                  ")
-        print("---------------------------")
-        print("---------------------------")
+        print("--------------------------------------------")
+        print("--------------------------------------------")
 
     def intermediate_choice(self):
 
