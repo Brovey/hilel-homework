@@ -19,16 +19,15 @@ class Product:
 
 
 class Storage:
-    storage = {}
-    income_by_item = {}
 
-    def __init__(self, product_quantity=0, income_by_product=0, total_income=0):
-        self.data_base = {}
-        self.product_quantity = product_quantity
-        self.total_income = total_income
-        self.income_by_product = income_by_product
+    def __init__(self):
+        self.income_by_item = {}  # keeping items id and their income
+        self.storage = {}  # keeping items id and their limits
+        self.total_income = 0
+        self.data_base = {}  # keeping items info
 
-    def print_total_income(self):
+    def print_income(self):
+        print(f'Already sold {self.income_by_item} UAH')
         print(f'Total income: {self.total_income} UAH')
 
     def add_item_manually(self):
@@ -48,17 +47,28 @@ class Storage:
         product_id = str(input("Enter item id:"))
         quantity = int(input("Enter item quantity:"))
         if product_id not in self.storage:
-            self.storage[product_id] = quantity
+            self.storage[product_id] = quantity  # adding new item id to storage
+            self.income_by_item[product_id] = 0  # adding new item id to income_by_item
         else:
             for key in self.storage.keys():
                 if key == product_id:
                     self.storage[key] += quantity
 
-        print(self.storage)
-
     def sell_product(self):
-        sell_item = input("How many item you want to sell:")
-        pass
+        sell_item = str(input("Enter item id  to sell:"))
+        sell_quantity = int(input("Enter how many items you want to sell:"))
+        for key in self.storage.keys():
+            if sell_item == key:
+                self.storage[key] -= sell_quantity
+                break
+        for key in self.income_by_item.keys():
+            if sell_item == key:
+                self.income_by_item[key] += sell_quantity * self.data_base[key][1]
+                self.total_income += sell_quantity * self.data_base[key][1]
+                break
+
+    def print_items_limits(self):
+        print()
 
 
 
@@ -70,16 +80,13 @@ class MainMenu:
     def print_menu(self):
         print("--------------------------")
         print("--------------------------")
-        print("- 5. Add new product to database ")
-        print("- 4. Add new product to storage ")
-        print("- Income by products")
-        print("- Current income")
-        print("- Total income")
+        print("- 1. Add new product to database ")
+        print("- 2. Add new product to storage ")
+        print("- 3. Sell product")
+        print("- 4. Income by products and total ")
         print("- Save to file")
         print("- Load from file")
-        print("- 1. Print product chars   ")
-        print("- 2. test")
-        print("- 3. Print total income   ")
+        print("- 5. Print product limits   ")
         print("- 0. Exit                  ")
         print("---------------------------")
         print("---------------------------")
@@ -115,17 +122,13 @@ def main():
 
         menu_call = float(input("Enter menu #:"))
         if menu_call == 1:
-            tst_product.print_product()
-            menu.intermediate_choice()
-        elif menu_call == 2:
-            tst_product.return_product()
-        elif menu_call == 3:
-            storage.print_total_income()
-        elif menu_call == 4:
-            storage.add_product_to_storage()
-        elif menu_call == 5:
             storage.add_item_manually()
-
+        elif menu_call == 3:
+            storage.sell_product()
+        elif menu_call == 4:
+            storage.print_income()
+        elif menu_call == 2:
+            storage.add_product_to_storage()
         elif menu_call == 0:
             exit()
 
