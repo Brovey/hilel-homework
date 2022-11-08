@@ -1,21 +1,4 @@
-class Product:
-    def __init__(self, price, product_name, product_id, category):
-        self.price = price
-        self.product_name = product_name
-        self.category = category
-        self.product_id = product_id
-
-    def print_product(self):
-        print("Product summary")
-        print("---------------")
-        print(f"Category: {self.category}\nName: {self.product_name}\n"
-              f"Id: {self.product_id}\nPrice: {self.price} uah ")
-
-    def return_product(self):
-        """returns product in dict"""
-        product_dict = {self.product_id: (self.product_name, self.price, self.category)}
-        print(product_dict)
-        return product_dict
+import csv
 
 
 class Storage:
@@ -27,20 +10,29 @@ class Storage:
         self.data_base = {}  # keeping items info
 
     def print_income(self):
-        print(f'Already sold:')
+        print("----------------")
+        print('Already sold:')
         for key in self.income_by_item:
-            print(f'{self.storage[key][0]} for  {self.income_by_item[key]} UAH')
-        print(f'Total income {self.total_income}')
+            print(f'{self.data_base[key][0]} for  {self.income_by_item[key]} UAH')
+        print("----------------")
+        print('Products in stock')
+        for key in self.storage:
+            print(f'{self.data_base[key][0]}  = {self.storage[key]}')
+        print("----------------")
+        print(f'Total income for all sold items:  {self.total_income} UAH')
 
     def add_item_manually(self):
+
         item_id = str(input("Enter item id:"))
         if item_id in self.data_base:
             print("This item id already in database")
         item_name = str(input("Enter item name:"))
         item_price = int(input("Enter item price:"))
         item_category = str(input("Enter item category:"))
-        item_details = [item_name, item_price, item_category]
+        item_quantity, items_sold, item_income = 0, 0, 0
+        item_details = [item_name, item_price, item_category, item_quantity, items_sold, item_income]
         self.data_base[item_id] = item_details
+
         print(self.data_base)
         print(f'You added new item {item_name} to category {item_category} in database')
 
@@ -69,6 +61,18 @@ class Storage:
                 self.total_income += sell_quantity * self.data_base[key][1]
                 break
 
+    def create_output_data(self):
+        output_list = []
+        for k, v in self.data_base.items():
+            output_list.append(
+                {"Item ID": k[0], "Item Name": v[0], "Item Price": v[1], "Category": v[2], 'Quantity': v[3],
+                 'Sold items': v[4], 'Income by item': v[5]}
+            )
+        return output_list
+
+    def print_database(self):
+        print(self.data_base)
+
 
 class MainMenu:
     def __init__(self, running=True):
@@ -77,57 +81,70 @@ class MainMenu:
     def print_menu(self):
         print("--------------------------------------------")
         print("--------------------------------------------")
-        print("- 1. Add new product to database ")
+        print("- 1. Add new product to database manually ")
         print("- 2. Add new product to storage ")
         print("- 3. Sell product")
         print("- 4. Income by products and total income ")
-        print("- Save to file")
-        print("- Load from file")
-        print("- 5. Print product limits   ")
+        print("- 5. Print product data base ")
+        print("- s. Save to file")
+        print("- l. Load from file")
         print("- 0. Exit                  ")
         print("--------------------------------------------")
         print("--------------------------------------------")
 
-    def intermediate_choice(self):
-
-        choose = input("Press 'b' to Return to main menu or 'e' for Exit")
-
-        if choose == "b":
-            self.print_menu()
-        elif choose == "e":
+    def choose_menu(self):
+        menu_call = str(input("Enter menu #:"))
+        if menu_call == "1":
+            storage.add_item_manually()
+        elif menu_call == "3":
+            storage.sell_product()
+        elif menu_call == "4":
+            storage.print_income()
+        elif menu_call == "2":
+            storage.add_product_to_storage()
+        elif menu_call == "5":
+            storage.print_database()
+        elif menu_call == "s":
+            files.save_to_file()
+        elif menu_call == "l":
+            files.load_from_file()
+        elif menu_call == "0":
             exit()
         else:
-            self.intermediate_choice()  # is it even legal? )
+            print("You entered wrong number try again")
 
 
-class WorkWithFile:
+class WorkWithFile(Storage):
+    def __init__(self):
+        super().__init__()
+
     def save_to_file(self):
-        pass
+        with open('shop.csv', 'w', newline="") as my_file:
+            fieldnames = ['Item ID', "Item Name", 'Item Price', 'Category', 'Quantity', 'Sold items', 'Income by item']
+            writer = csv.DictWriter(my_file, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(storage.create_output_data())
 
     def load_from_file(self):
-        pass
+        with open('shop.csv', 'r', newline='') as my_file:
+            input_list = []
+            reader = csv.DictReader(my_file)
+            for k in reader:
+                input_list.append(
+                    {k["Item ID"]: [k["Item Name"], int(k['Item Price']), k['Category'], int(k['Quantity']),
+                                    int(k['Sold items']), int(k['Income by item'])]}
+                )
+        return input_list
 
-
-tst_product = Product(125, "Ball", "54621312", "Sport equip")
 storage = Storage()
 menu = MainMenu()
+files = WorkWithFile()
 
 
 def main():
     while True:
         menu.print_menu()
-
-        menu_call = float(input("Enter menu #:"))
-        if menu_call == 1:
-            storage.add_item_manually()
-        elif menu_call == 3:
-            storage.sell_product()
-        elif menu_call == 4:
-            storage.print_income()
-        elif menu_call == 2:
-            storage.add_product_to_storage()
-        elif menu_call == 0:
-            exit()
+        menu.choose_menu()
 
 
 if __name__ == '__main__':
